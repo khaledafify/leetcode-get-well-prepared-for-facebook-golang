@@ -7,28 +7,25 @@ import (
 
 func main() {
 
-	fmt.Println(lengthOfLongestSubstring(""))
+	fmt.Println(lengthOfLongestSubstring("dvdf"))
 }
 
 func lengthOfLongestSubstring(s string) int {
 	var mx int = 0
 	var temp string = ""
-	var ctr int = 0
 
 	for _, v := range s {
 
-		found := strings.ContainsAny(temp, string(v))
+		found := strings.Index(temp, string(v))
 
-		if !found {
-			ctr++
+		if found == -1 {
 			temp = temp + string(v)
 		} else {
-			ctr = 1
-			temp = "" + string(v)
+			temp = temp[found+1:] + string(v)
 		}
 
-		if mx < ctr {
-			mx = ctr
+		if mx < len(temp) {
+			mx = len(temp)
 		}
 	}
 
